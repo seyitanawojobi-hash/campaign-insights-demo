@@ -138,3 +138,22 @@ def test_api_underperforming_route_not_shadowed():
     response = client.get("/campaigns/underperforming")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
+
+
+def test_dashboard_served_at_root():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    body = response.text
+    assert "Campaign Insights" in body
+    assert "Underperforming Campaigns" in body
+    assert "fetch(\"/campaigns\")" in body
+    assert "fetch(\"/summary\")" in body
+    assert "fetch(\"/campaigns/underperforming\")" in body
+
+
+def test_dashboard_does_not_break_api_routes():
+    assert client.get("/health").status_code == 200
+    assert client.get("/campaigns").status_code == 200
+    assert client.get("/campaigns/underperforming").status_code == 200
+    assert client.get("/summary").status_code == 200
