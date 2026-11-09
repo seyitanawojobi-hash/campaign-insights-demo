@@ -1,0 +1,8 @@
+[
+  "test_analytics.py::test_api_campaign_lookup_and_not_found",
+  "test_analytics.py::test_api_lists_campaigns",
+  "test_analytics.py::test_api_summary_and_health",
+  "test_analytics.py::test_enrich_campaign_calculates_metrics",
+  "test_analytics.py::test_safe_ratio_handles_zero_denominator",
+  "test_analytics.py::test_summary_uses_weighted_totals"
+]

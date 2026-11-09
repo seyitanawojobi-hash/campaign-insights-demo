@@ -1,0 +1,42 @@
+[
+  {
+    "id": "spring-launch",
+    "name": "Spring Creative Launch",
+    "channel": "paid_social",
+    "impressions": 120000,
+    "clicks": 4800,
+    "conversions": 192,
+    "spend": 6000.0,
+    "revenue": 24000.0
+  },
+  {
+    "id": "retargeting-q3",
+    "name": "Q3 Retargeting",
+    "channel": "display",
+    "impressions": 85000,
+    "clicks": 1700,
+    "conversions": 17,
+    "spend": 4000.0,
+    "revenue": 5200.0
+  },
+  {
+    "id": "email-nurture",
+    "name": "Email Nurture",
+    "channel": "email",
+    "impressions": 30000,
+    "clicks": 2400,
+    "conversions": 96,
+    "spend": 1000.0,
+    "revenue": 9000.0
+  },
+  {
+    "id": "new-audience-test",
+    "name": "New Audience Experiment",
+    "channel": "paid_social",
+    "impressions": 40000,
+    "clicks": 0,
+    "conversions": 0,
+    "spend": 500.0,
+    "revenue": 0.0
+  }
+]
