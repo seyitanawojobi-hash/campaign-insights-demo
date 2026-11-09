@@ -5,7 +5,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 
-from analytics import enrich_campaign, summarize_campaigns
+from analytics import enrich_campaign, find_underperforming, summarize_campaigns
 
 app = FastAPI(title="Campaign Insights Demo", version="0.1.0")
 DATA_FILE = Path(__file__).with_name("campaigns.json")
@@ -25,6 +25,11 @@ def health() -> dict[str, str]:
 @app.get("/campaigns")
 def list_campaigns() -> list[dict]:
     return [enrich_campaign(item) for item in load_campaigns()]
+
+
+@app.get("/campaigns/underperforming")
+def underperforming_campaigns() -> list[dict]:
+    return find_underperforming(load_campaigns())
 
 
 @app.get("/campaigns/{campaign_id}")
