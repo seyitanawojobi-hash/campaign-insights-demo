@@ -4,17 +4,25 @@ import json
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 
-from analytics import enrich_campaign, summarize_campaigns
+from analytics import enrich_campaign, find_underperforming, summarize_campaigns
 
 app = FastAPI(title="Campaign Insights Demo", version="0.1.0")
 DATA_FILE = Path(__file__).with_name("campaigns.json")
+STATIC_DIR = Path(__file__).with_name("static")
 
 
 def load_campaigns() -> list[dict]:
     """Load bundled fictional campaign data."""
     with DATA_FILE.open(encoding="utf-8") as handle:
         return json.load(handle)
+
+
+@app.get("/")
+def dashboard() -> FileResponse:
+    """Serve the campaign performance dashboard."""
+    return FileResponse(STATIC_DIR / "index.html")
 
 
 @app.get("/health")
@@ -25,6 +33,11 @@ def health() -> dict[str, str]:
 @app.get("/campaigns")
 def list_campaigns() -> list[dict]:
     return [enrich_campaign(item) for item in load_campaigns()]
+
+
+@app.get("/campaigns/underperforming")
+def underperforming_campaigns() -> list[dict]:
+    return find_underperforming(load_campaigns())
 
 
 @app.get("/campaigns/{campaign_id}")
